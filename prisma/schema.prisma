@@ -9,3 +9,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Category {
+  category_id Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  description String   @db.Text
+  status      Status   @default(DRAFT)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  RETIRED
+}
